@@ -18,7 +18,7 @@ export const getUsers = (req, res) => {
 }
 
 export const getUser = (req, res) => {
-    const { id } = req.params; //destruct
+    const { id } = req.params; //deconstruct
     const foundUser = users.find((user) => user.id === id);
     res.send(foundUser);
 }
