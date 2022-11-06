@@ -1,9 +1,9 @@
 import express from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'; //creates unique ids package
 
 const router = express.Router();
 
-const users = [];
+let users = [];  //let declaration here
 
 //all routes here start with /users
 router.get('/', (req, res) => {
@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 
     res.send(users);
 });
+
 
 router.post('/', (req, res) => {
     const user = req.body;
@@ -22,8 +23,20 @@ router.post('/', (req, res) => {
     res.send(`User with the name ${user.firstName} added to the database.`);
 });
 
-router.get('/:id', (req, res) =>{
-    res.send('THE GET ID ROUTE');
+
+//req.parms {id: }
+router.get('/:id', (req, res) => {
+    const { id } = req.params; //destruct
+    const foundUser = users.find((user) => user.id === id);
+    res.send(foundUser);
+});
+
+//delete users
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    users = users.filter((user) => user.id != id ); //filter removes elements to false values
+    res.send(`User with the id ${id} deleted from the database.`);
 });
 
 export default router;
