@@ -8,8 +8,8 @@ const PORT = 5000;
 
 app.use(bodyParser.json()); //using jason data in our app
 
-//all routes here start with /users
-app.use('/', usersRoutes);
+
+app.use('/users', usersRoutes);
 
 app.get('/', (req, res) => {
     res.send('hello from homepage.');
